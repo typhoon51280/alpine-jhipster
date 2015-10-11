@@ -31,7 +31,8 @@ RUN npm install -g generator-jhipster
 # configure the "jhipster" and "root" users
 RUN echo 'root:jhipster' |chpasswd
 RUN addgroup jhipster
-RUN echo 'jhipster' | adduser -s /bin/bash -G jhipster jhipster
+RUN adduser -S -s /bin/bash -G jhipster jhipster
+RUN echo 'jhipster:jhipster' |chpasswd
 RUN echo '%jhipster ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/jhipster
 
 # install the sample app to download all Maven dependencies
