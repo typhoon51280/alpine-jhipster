@@ -5,9 +5,9 @@ RUN apk add --update bash vim git sudo zip bzip2 fontconfig curl openssh && \
     rm /var/cache/apk/*
 
 # Setup SSH
-RUN mkdir -p ~root/.ssh && chmod 700 ~root/.ssh/ && \ 
-    chown -R root:root ~/.ssh && chmod 700 ~/.ssh/ && chmod 600 ~/.ssh/* && \
-    ssh-keygen -A && \
+# RUN mkdir -p ~root/.ssh && chmod 700 ~root/.ssh/ && \ 
+#     chown -R root:root ~/.ssh && chmod 700 ~/.ssh/ && chmod 600 ~/.ssh/* && \
+RUN  ssh-keygen -A && \
     sed -i 's/^#Port 22.*/Port 22/' /etc/ssh/sshd_config && \
     sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/^#UseDNS.*/UseDNS no/' /etc/ssh/sshd_config && \
