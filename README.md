@@ -1,5 +1,5 @@
 Docker build for JHipster on Alpine
-================================
+===================================
 
 This is the Docker build for JHipster based on linux image Alpine.
 
