@@ -8,7 +8,8 @@ install:
   - docker run -d --name=alpine-jhipster -p 8080:8080 -p 3000:3000 -p 3001:3001 -p 4022:22 -w /home/jhipster/jhipster-sample-app/ typhoon51280/alpine-jhipster mvn spring-boot:run ; sleep 120
 script:
   - docker logs alpine-jhipster
+  - curl --retry 10 --retry-delay 5 -I http://localhost:8080/ | grep "HTTP/1.1 200 OK"
   # - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   # - docker push typhoon51280/alpine-jhipster
-  - curl --retry 10 --retry-delay 5 -I http://localhost:8080/ | grep "HTTP/1.1 200 OK"
+  
   # - curl -H "Content-Type: application/json" --data '{"docker_tag": "latest"}' -X POST https://registry.hub.docker.com/u/typhoon51280/alpine-jhipster/trigger/5923ba65-d692-4f06-bd9c-bc5c3ba8c295/

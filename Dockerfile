@@ -1,7 +1,7 @@
 FROM typhoon51280/alpine-node-java8
 
 # install utilities
-RUN apk add --update bash vim git sudo zip bzip2 fontconfig curl openssh && \
+RUN apk add --update bash vim git sudo zip bzip2 fontconfig curl openssh make gcc g++ python linux-headers paxctl libgcc libstdc++ && \
     rm /var/cache/apk/*
 
 # Setup SSH
@@ -29,11 +29,11 @@ RUN npm install -g yo bower grunt-cli
 RUN npm install -g generator-jhipster
 
 # configure the "jhipster" and "root" users
-RUN echo 'root:jhipster' |chpasswd
-RUN addgroup jhipster
-RUN adduser -S -s /bin/bash -G jhipster jhipster
-RUN echo 'jhipster:jhipster' |chpasswd
+RUN addgroup jhipster && \
+    adduser -S -s /bin/bash -G jhipster jhipster
 RUN echo '%jhipster ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/jhipster
+RUN echo 'root:jhipster' | chpasswd
+RUN echo 'jhipster:jhipster' | chpasswd
 
 # install the sample app to download all Maven dependencies
 RUN cd /home/jhipster && \
